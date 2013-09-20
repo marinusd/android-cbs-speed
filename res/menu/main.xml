@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:enabled="false" android:visible="false"/>
+
+    <item android:id="@+id/smallerFontItem" android:title="SmallerFont" android:titleCondensed="smaller"> </item>
+    <item android:id="@+id/biggerFontItem" android:title="BiggerFont" android:titleCondensed="bigger"> </item>
+    <item android:id="@+id/rollFilesItem" android:titleCondensed="Roll Files" android:title="Roll Files"></item>
+    
+    
+</menu>
