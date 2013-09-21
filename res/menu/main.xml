@@ -8,6 +8,7 @@
 
     <item android:id="@+id/smallerFontItem" android:title="SmallerFont" android:titleCondensed="smaller"> </item>
     <item android:id="@+id/biggerFontItem" android:title="BiggerFont" android:titleCondensed="bigger"> </item>
+    <item android:id="@+id/resetFontItem" android:title="ResetFont" android:titleCondensed="reset"> </item>
     <item android:id="@+id/rollFilesItem" android:titleCondensed="Roll Files" android:title="Roll Files"></item>
     
     

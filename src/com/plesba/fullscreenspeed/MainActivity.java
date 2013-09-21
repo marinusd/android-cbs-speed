@@ -168,7 +168,21 @@ public class MainActivity extends Activity {
 		float increment = 4.0f;
 		float currentSize = displayView.getTextSize();
 		Log.i(TAG, "currentFontSize: " + currentSize);
-		float newSize = currentSize + (increment * direction);
+		float newSize;
+		switch (direction) {
+		case -1:
+			newSize = (currentSize - increment);
+			break;
+		case 0:
+			newSize = Float.valueOf(fontSizeStr);
+			break;
+		case 1:
+			newSize = (currentSize + increment);
+			break;
+		default:
+			newSize = currentSize;
+			break;
+		}
 		displayView.setTextSize(newSize);
 		editor = settings.edit();
 		editor.putString("FONT_SIZE", Float.toString(newSize));
@@ -186,6 +200,9 @@ public class MainActivity extends Activity {
 			return true;
 		case R.id.biggerFontItem:
 			changeFontSize(1);
+			return true;
+		case R.id.resetFontItem:
+			changeFontSize(0);
 			return true;
 		case R.id.rollFilesItem:
 			// start new files somehow
