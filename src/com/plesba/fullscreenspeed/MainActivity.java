@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -120,7 +121,7 @@ public class MainActivity extends Activity {
 	private void initializeGui() {
 		setContentView(R.layout.activity_main);
 		displayView = (TextView) findViewById(R.id.textView2);
-		displayView.setTextSize(Float.valueOf(fontSizeStr));
+		displayView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.valueOf(fontSizeStr)); // 1=DeviceIndependentPixels
 		wakeLock.acquire();
 		write.syslog("gui initialized");
 	}
@@ -165,7 +166,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void changeFontSize(int direction) {
-		float increment = 4.0f;
+		float increment = 10.0f;
 		float currentSize = displayView.getTextSize();
 		Log.i(TAG, "currentFontSize: " + currentSize);
 		float newSize;
@@ -183,7 +184,7 @@ public class MainActivity extends Activity {
 			newSize = currentSize;
 			break;
 		}
-		displayView.setTextSize(newSize);
+		displayView.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize); // 1=DeviceIndependentPixels
 		editor = settings.edit();
 		editor.putString("FONT_SIZE", Float.toString(newSize));
 		editor.commit();
