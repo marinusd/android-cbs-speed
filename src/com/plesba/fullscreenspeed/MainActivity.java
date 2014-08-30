@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,6 +20,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.plesba.fullscreenspeed.GPS_ListenerService.GPSBinder;
@@ -119,6 +122,9 @@ public class MainActivity extends Activity {
 	}
 
 	private void initializeGui() {
+	    requestWindowFeature(Window.FEATURE_NO_TITLE); 
+	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		displayView = (TextView) findViewById(R.id.textView2);
 		displayView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.valueOf(fontSizeStr)); // 1=DeviceIndependentPixels
