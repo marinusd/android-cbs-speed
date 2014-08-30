@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
 	private String lastLong = "";
 	private String speed = "";
 	private String lastSpeed = "";
+	private boolean colorToggle = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,18 @@ public class MainActivity extends Activity {
 		write.syslog("gui initialized");
 	}
 
+	private void toggleColor() {
+		if (colorToggle) {
+			displayView.setBackgroundColor(Color.BLACK);
+			displayView.setTextColor(Color.WHITE);
+			colorToggle = false;
+		} else {
+			displayView.setBackgroundColor(Color.WHITE);
+			displayView.setTextColor(Color.BLACK);
+			colorToggle = true;
+		}
+	}
+	
 	private void setDisplayText(final String str) {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -210,6 +224,9 @@ public class MainActivity extends Activity {
 			return true;
 		case R.id.resetFontItem:
 			changeFontSize(0);
+			return true;
+		case R.id.toggleColorItem:
+			toggleColor();
 			return true;
 		case R.id.rollFilesItem:
 			// start new files somehow
