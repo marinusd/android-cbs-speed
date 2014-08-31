@@ -19,8 +19,10 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -32,7 +34,9 @@ public class MainActivity extends Activity {
 	private SharedPreferences settings;
 	private SharedPreferences.Editor editor;
 	private String fontSizeStr = "248";
+	private View rootView;
 	private TextView displayView;
+	private TextView logoView;
 	private FileWriter write;
 	private PowerManager.WakeLock wakeLock;
 	private ServiceConnection gpsSvcConn;
@@ -50,7 +54,7 @@ public class MainActivity extends Activity {
 	private String lastLong = "";
 	private String speed = "";
 	private String lastSpeed = "";
-	private boolean colorToggle = false;
+	private boolean colorToggle = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onServiceDisconnected(ComponentName name) {
-				isGPSserviceBound = false;
+				isGPSserviceBound = false; 
 				write.syslog("GPS service came unbound?");
 			}
 		};
@@ -129,6 +133,9 @@ public class MainActivity extends Activity {
 		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		displayView = (TextView) findViewById(R.id.textView2);
+		rootView = displayView.getRootView();
+		logoView = (TextView) findViewById(R.id.textView1);
+		logoView.setTextColor(Color.GRAY);
 		displayView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.valueOf(fontSizeStr)); // 1=DeviceIndependentPixels
 		wakeLock.acquire();
 		write.syslog("gui initialized");
@@ -136,10 +143,12 @@ public class MainActivity extends Activity {
 
 	private void toggleColor() {
 		if (colorToggle) {
+			rootView.setBackgroundColor(Color.BLACK);
 			displayView.setBackgroundColor(Color.BLACK);
 			displayView.setTextColor(Color.WHITE);
 			colorToggle = false;
 		} else {
+			rootView.setBackgroundColor(Color.WHITE);
 			displayView.setBackgroundColor(Color.WHITE);
 			displayView.setTextColor(Color.BLACK);
 			colorToggle = true;

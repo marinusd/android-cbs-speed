@@ -57,12 +57,14 @@ public class GPS_ListenerService extends Service {
 	} // longitude has up to 3 digits
 
 	// speed is reported in meters/second
-	// speed needs three digits, and maybe three more past the decimal point:
-	// 145.608
+	// speed needs three digits
+	// 145
 	public String getSpeed() {
 		if (lastSpeed < 1.0f) { return "000"; }
 		float mph = lastSpeed * metersSec_in_MPH;
 		String lValue = Integer.toString((int) mph);
+		if (lValue.length() == 1) { return "  " + lValue; }
+		if (lValue.length() == 2) { return " " + lValue; }
 		return lValue;
 	}
 
