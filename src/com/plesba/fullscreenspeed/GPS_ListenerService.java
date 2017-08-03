@@ -105,10 +105,12 @@ public class GPS_ListenerService extends Service {
 		Criteria criteria = new Criteria();
 		criteria.setSpeedRequired(true);
 		//criteria.setSpeedAccuracy(Criteria.ACCURACY_FINE); // Not supported in Android 2.1 !!
+        int minMeters = 1;
+        int minMillis = 200;
 		// register the listener
 		locationManager.requestLocationUpdates(
-				locationManager.getBestProvider(criteria, false), 250, 
-				5, gpsLocationListener);
+				locationManager.getBestProvider(criteria, false),
+                minMillis, minMeters, gpsLocationListener);
 		write.syslog(TAG + " GPS updates requested.");
 	}
 
